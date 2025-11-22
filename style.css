@@ -1,0 +1,178 @@
+/* Styles et animations pour inscription.html */
+
+:root{
+  --bg1: #0f172a;
+  --bg2: #0b2545;
+  --card-bg: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.04);
+  --accent1: #7c3aed;
+  --accent2: #06b6d4;
+  --muted: rgba(255,255,255,0.75);
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(2,6,23,0.6);
+  --fw-regular: 400;
+  --fw-strong: 700;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(120deg,var(--bg1),var(--bg2));
+  color: #eef2ff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+  overflow:auto;
+  background-size: 400% 400%;
+  animation: bgShift 18s ease infinite;
+}
+
+/* Container principal */
+main.cover{
+  width: min(920px, 96%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px;
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+  backdrop-filter: blur(6px) saturate(120%);
+  transform-origin:center;
+  animation: popIn .7s cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* Colonne gauche (contenu principal) */
+section.left{
+  flex:1 1 640px;
+  min-width: 280px;
+  color:var(--muted);
+  position:relative;
+  padding:18px 6px;
+}
+
+/* Logo / marque */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+.mark{
+  width:64px;
+  height:64px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  color:white;
+  background: linear-gradient(135deg,var(--accent1),var(--accent2));
+  box-shadow: 0 6px 18px rgba(124,58,237,0.18), inset 0 -6px 18px rgba(0,0,0,0.15);
+  font-size:20px;
+  transform:translateZ(0);
+  animation: markFloat 4s ease-in-out infinite, markPulse 2.2s ease-in-out infinite;
+}
+.institution{font-weight:700;color:#fff}
+.dept{font-size:12px;opacity:.85}
+
+/* Titres */
+h1{
+  margin:8px 0 6px 0;
+  color:#fff;
+  font-size:26px;
+  letter-spacing:0.2px;
+  font-weight:800;
+  text-shadow: 0 2px 12px rgba(12,18,38,0.6);
+  transition: transform .25s ease;
+}
+h1:hover{transform: translateY(-3px)}
+h2{
+  margin:0 0 12px 0;
+  font-weight:600;
+  color: #dbeafe;
+  opacity:.95;
+  font-size:16px;
+}
+
+/* Paragraphe d'intro */
+.lead{
+  margin:18px 0;
+  line-height:1.55;
+  color: rgba(235,240,255,0.9);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:14px;
+  border-radius:10px;
+  border: 1px solid rgba(255,255,255,0.03);
+  animation: fadeInUp .8s ease both .18s;
+}
+
+/* Meta informations */
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  margin-top:10px;
+}
+.meta .item{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:13px;
+  color:rgba(230,235,255,0.9);
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 4px 18px rgba(5,8,20,0.45);
+  transform-origin:left center;
+  animation: fadeInStagger .6s ease both;
+}
+.meta .item:nth-child(1){animation-delay:.25s}
+.meta .item:nth-child(2){animation-delay:.35s}
+.meta .item:nth-child(3){animation-delay:.45s}
+.meta .item:nth-child(4){animation-delay:.55s}
+
+/* Animations keyframes */
+@keyframes bgShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes markFloat{
+  0%{transform: translateY(0)}
+  50%{transform: translateY(-6px)}
+  100%{transform: translateY(0)}
+}
+@keyframes markPulse{
+  0%{box-shadow: 0 6px 18px rgba(124,58,237,0.18)}
+  50%{box-shadow: 0 18px 40px rgba(101, 168, 180, 0.12)}
+  100%{box-shadow: 0 6px 18px rgba(124,58,237,0.18)}
+}
+@keyframes fadeInUp{
+  0%{opacity:0;transform:translateY(10px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeInStagger{
+  0%{opacity:0;transform:translateY(6px) scale(.995)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes popIn{
+  0%{opacity:0;transform:scale(.985) translateY(8px)}
+  100%{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* Réduire les animations si l'utilisateur préfère */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important; transition:none!important}
+}
+
+/* Responsive */
+@media (max-width:720px){
+  main.cover{flex-direction:column;padding:20px}
+  .mark{width:56px;height:56px}
+  h1{font-size:20px}
+  .lead{padding:12px}
+}
